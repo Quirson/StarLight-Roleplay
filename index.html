@@ -1,1276 +1,1161 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quirson Fernando Ngale - Desenvolvedor Profissional</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fef2f2',
-                            100: '#fee2e2',
-                            200: '#fecaca',
-                            300: '#fca5a5',
-                            400: '#f87171',
-                            500: '#ef4444',
-                            600: '#dc2626',
-                            700: '#b91c1c',
-                            800: '#991b1b',
-                            900: '#7f1d1d'
-                        },
-                        dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .floating-animation {
-            animation: float 3s ease-in-out infinite;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarLight Roleplay - SAMP Server</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+    :root {
+      --primary-violet: #4c1d95;
+      --dark-violet: #2d1b69;
+      --light-violet: #7c3aed;
+      --accent-violet: #8b5cf6;
+    }
 
-        .gradient-text {
-            background: linear-gradient(45deg, #dc2626, #ef4444, #f87171);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      overflow-x: hidden;
+    }
 
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .orbitron {
+      font-family: 'Space Grotesk', sans-serif;
+    }
 
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
+    .page {
+      display: none;
+      min-height: 100vh;
+      animation: fadeIn 0.8s ease-in-out;
+      padding-bottom: 80px;
+    }
 
-        .theme-transition {
-            transition: all 0.3s ease;
-        }
+    .page.active {
+      display: block;
+    }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .bg-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: moveShape 20s infinite linear;
-        }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #dc2626, #ef4444);
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(100px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(45deg, #f87171, #fca5a5);
-            top: 60%;
-            left: 80%;
-            animation-delay: -5s;
-        }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
 
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #b91c1c, #dc2626);
-            top: 80%;
-            left: 20%;
-            animation-delay: -10s;
-        }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+    }
 
-        .shape:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #ef4444, #f87171);
-            top: 30%;
-            left: 70%;
-            animation-delay: -15s;
-        }
+    .animate-slide-in-left {
+      animation: slideInLeft 1s ease-out;
+    }
 
-        @keyframes moveShape {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0px) rotate(360deg); }
-        }
+    .animate-slide-in-right {
+      animation: slideInRight 1s ease-out;
+    }
 
-        /* Page transitions */
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
+    .animate-slide-in-up {
+      animation: slideInUp 1s ease-out;
+    }
 
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
+    .animate-pulse-custom {
+      animation: pulse 2s infinite;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .animate-glow {
+      animation: glow 3s infinite;
+    }
 
-        /* Enhanced project cards */
-        .project-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(220, 38, 38, 0.1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
-        }
+    .gradient-text {
+      background: linear-gradient(45deg, #8b5cf6, #a855f7, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .dark .project-card {
-            background: rgba(30, 41, 59, 0.98);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.15);
-        }
+    .glass-effect {
+      background: rgba(139, 92, 246, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.15), transparent);
-            transition: left 0.6s ease;
-            z-index: 1;
-        }
+    .rule-block {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.2) 0%, rgba(45, 27, 105, 0.3) 100%);
+      border-left: 4px solid #8b5cf6;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
 
-        .project-card:hover::before {
-            left: 100%;
-        }
+    .rule-block:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    }
 
-        .project-card:hover {
-            border-color: rgba(220, 38, 38, 0.3);
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
-        }
+    .nav-button {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .project-image-placeholder {
-            position: relative;
-            overflow: hidden;
-        }
+    .nav-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
 
-        .project-image-placeholder img {
-            transition: transform 0.4s ease;
-        }
+    .nav-button:hover::before {
+      left: 100%;
+    }
 
-        .project-card:hover .project-image-placeholder img {
-            transform: scale(1.05);
-        }
+    .team-card {
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.2) 0%, rgba(45, 27, 105, 0.3) 100%);
+    }
 
-        /* Theme selector */
-        .theme-selector {
-            position: relative;
-        }
+    .team-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+    }
 
-        .theme-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            dark:bg-gray-800;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 8px;
-            min-width: 200px;
-            z-index: 1000;
-            display: none;
-        }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
 
-        .theme-dropdown.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
 
-        .theme-option {
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .rules-dashboard {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+      min-height: 70vh;
+    }
 
-        .theme-option:hover {
-            background: #f3f4f6;
-        }
+    .rules-sidebar {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.3) 0%, rgba(45, 27, 105, 0.4) 100%);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
 
-        .dark .theme-option:hover {
-            background: #374151;
-        }
+    .rules-category {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
 
-        /* Professional background pattern */
-        .professional-bg {
-            background:
-                    linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%),
-                    radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.03) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 80%, rgba(248, 113, 113, 0.03) 0%, transparent 50%);
-        }
+    .rules-category:hover {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateX(5px);
+    }
 
-        .dark .professional-bg {
-            background:
-                    linear-gradient(135deg, #0f172a 0%, #1e293b 100%),
-                    radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 80%, rgba(248, 113, 113, 0.08) 0%, transparent 50%);
-        }
+    .rules-category.active {
+      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+      border-color: #a855f7;
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    }
 
-        /* Navigation active state */
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
+    .rules-category-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: 1rem;
+      background: rgba(139, 92, 246, 0.3);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(45deg, #dc2626, #ef4444);
-            transition: left 0.3s ease;
-        }
+    .rules-category.active .rules-category-icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            left: 0;
-        }
+    .rules-content-area {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.2) 0%, rgba(45, 27, 105, 0.3) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 1rem;
+      padding: 2rem;
+      min-height: 600px;
+    }
 
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-        }
+    .rules-section {
+      display: none;
+      animation: fadeInUp 0.6s ease-out;
+    }
 
-        .modal-content {
-            margin: 5% auto;
-            padding: 20px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 12px;
-            animation: modalSlide 0.3s ease;
-        }
+    .rules-section.active {
+      display: block;
+    }
 
-        @keyframes modalSlide {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+    .cheat-tier-card {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.3) 0%, rgba(45, 27, 105, 0.4) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
 
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    .cheat-tier-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3);
+      border-color: rgba(139, 92, 246, 0.5);
+    }
 
-        .close:hover {
-            color: #dc2626;
-        }
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.95);
-        }
+    .cheat-tier-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
 
-        .image-modal img {
-            display: block;
-            margin: auto;
-            max-width: 90%;
-            max-height: 90%;
-            margin-top: 5%;
-        }
-        /* Carousel Styles */
-        .carousel-container {
-            user-select: none;
-        }
+    .cheat-tier-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+    }
 
-        .carousel-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
+    .tier-lc { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); }
+    .tier-mc { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .tier-rc { background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%); }
 
-        .carousel-track {
-            width: 100%;
-            will-change: transform;
-        }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
 
-        .carousel-slide {
-            position: relative;
-        }
+    .rule-item {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+    }
 
-        .carousel-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+    .rule-item:hover {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateY(-2px);
+    }
 
-        .carousel-btn:hover {
-            transform: translateY(-50%) scale(1.1);
-            shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .carousel-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
+    @media (max-width: 768px) {
+      .rules-dashboard {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
 
-        .carousel-indicators {
-            padding: 16px 0;
-        }
-
-        .indicator {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .indicator:hover {
-            transform: scale(1.2);
-        }
-
-        /* Animações suaves */
-        .carousel-track {
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .carousel-wrapper {
-                height: 250px;
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
-
-            .carousel-prev {
-                left: 8px;
-            }
-
-            .carousel-next {
-                right: 8px;
-            }
-        }
-
-        /* Loading placeholder */
-        .carousel-slide img {
-            transition: opacity 0.3s ease;
-        }
-
-        .carousel-slide img:not([src]) {
-            opacity: 0;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-    </style>
+      .rules-sidebar {
+        position: static;
+        order: 2;
+      }
+    }
+  </style>
 </head>
-<body class="theme-transition bg-gray-50 dark:bg-dark-900 text-gray-900 dark:text-white professional-bg">
-<!-- Animated Background -->
-<div class="animated-bg">
-    <div class="bg-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+<body class="text-white">
+<!-- Animated Stars Background -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none">
+  <div class="star w-1 h-1" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+  <div class="star w-1 h-1" style="top: 20%; left: 80%; animation-delay: 0.5s;"></div>
+  <div class="star w-1 h-1" style="top: 60%; left: 20%; animation-delay: 1s;"></div>
+  <div class="star w-1 h-1" style="top: 80%; left: 70%; animation-delay: 1.5s;"></div>
+  <div class="star w-1 h-1" style="top: 30%; left: 90%; animation-delay: 2s;"></div>
+  <div class="star w-1 h-1" style="top: 70%; left: 5%; animation-delay: 2.5s;"></div>
 </div>
 
 <!-- Navigation -->
-<nav class="fixed top-0 w-full bg-white/90 dark:bg-dark-800/90 backdrop-blur-xl z-50 shadow-xl border-b border-red-100 dark:border-red-900/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-4">
-            <div class="text-2xl font-bold gradient-text">Quirson Ngale</div>
-
-            <div class="hidden md:flex space-x-8">
-                <a href="#" class="nav-link px-3 py-2 hover:text-primary-600 dark:hover:text-primary-400 active" data-page="home">Home</a>
-                <a href="#" class="nav-link px-3 py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="projects">Projetos</a>
-                <a href="#" class="nav-link px-3 py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="about">Sobre</a>
-                <a href="#" class="nav-link px-3 py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="contact">Contato</a>
-            </div>
-
-            <div class="flex items-center space-x-4">
-                <div class="theme-selector relative">
-                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-dark-700 hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors">
-                        <i class="fas fa-palette"></i>
-                    </button>
-                    <div id="theme-dropdown" class="theme-dropdown bg-white dark:bg-dark-800 border dark:border-dark-600">
-                        <div class="theme-option" data-theme="light">
-                            <i class="fas fa-sun text-yellow-500"></i>
-                            <span>Modo Claro</span>
-                        </div>
-                        <div class="theme-option" data-theme="dark">
-                            <i class="fas fa-moon text-blue-400"></i>
-                            <span>Modo Escuro</span>
-                        </div>
-                    </div>
-                </div>
-
-                <button id="mobile-menu" class="md:hidden p-2">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-nav" class="hidden md:hidden pb-4">
-            <a href="#" class="block py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="home">Home</a>
-            <a href="#" class="block py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="projects">Projetos</a>
-            <a href="#" class="block py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="about">Sobre</a>
-            <a href="#" class="block py-2 hover:text-primary-600 dark:hover:text-primary-400" data-page="contact">Contato</a>
-        </div>
+<nav class="fixed top-0 w-full z-50 glass-effect">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div class="orbitron text-2xl font-bold gradient-text animate-pulse-custom">
+        StarLight Roleplay
+      </div>
+      <div class="flex space-x-6">
+        <button onclick="showPage('home')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold">Home</button>
+        <button onclick="showPage('about')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold">About</button>
+        <button onclick="showPage('rules')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold">Rules</button>
+        <button onclick="showPage('admins')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold">Admins</button>
+        <button onclick="showPage('contacts')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold">Contacts</button>
+      </div>
     </div>
+  </div>
 </nav>
 
-<!-- Home Page -->
-<div id="home-page" class="page active">
-    <div class="min-h-screen flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h1 class="text-4xl md:text-6xl font-bold">
-                        Olá, eu sou <span class="gradient-text">Quirson Fernando Ngale</span>
-                    </h1>
-                    <p class="text-xl text-gray-600 dark:text-gray-300">
-                        Desenvolvedor Profissional especializado em mais de 4 linguagens de programação
-                    </p>
-                    <div class="space-y-4 text-lg">
-                        <p><i class="fas fa-birthday-cake text-primary-600 mr-3"></i>20 Anos</p>
-                        <p><i class="fas fa-graduation-cap text-primary-600 mr-3"></i>ISCTEM Fanzedo - Engenharia Informática</p>
-                        <p><i class="fas fa-code text-primary-600 mr-3"></i>Programador & Desenvolvedor</p>
-                    </div>
-
-                    <!-- Social Links -->
-                    <div class="flex flex-wrap gap-4 pt-6">
-                        <a href="https://github.com/Quirson" target="_blank" class="social-link bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fab fa-github text-xl"></i>
-                        </a>
-                        <a href="mailto:quirsonngale@gmail.com" class="social-link bg-red-600 hover:bg-red-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/quirson-fernando-ngale-97a4a3375" target="_blank" class="social-link bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="https://instagram.com/quirson_ngale_" target="_blank" class="social-link bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="https://discord.com/users/quirson_ngale" target="_blank" class="social-link bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fab fa-discord text-xl"></i>
-                        </a>
-                        <a href="https://wa.me/message/XWI7LP5B25HUO1" target="_blank" class="social-link bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition-all hover:scale-110">
-                            <i class="fab fa-whatsapp text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Profile Image -->
-                <div class="flex justify-center lg:justify-end">
-                    <div class="relative">
-                        <div class="w-80 h-80 rounded-full bg-gradient-to-r from-primary-400 to-primary-600 p-2 floating-animation">
-                            <div class="w-full h-full rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                                <img src="Imagens/NgaleJunior.jpg" alt="Quirson Fernando Ngale" class="w-full h-full object-cover rounded-full">
-                            </div>
-                        </div>
-                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center animate-pulse">
-                            <i class="fas fa-code text-white text-2xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <div class="pt-20 min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="orbitron text-6xl font-black mb-6 gradient-text animate-slide-in-up">
+          STARLIGHT ROLEPLAY
+        </h1>
+        <p class="text-2xl mb-8 text-violet-200 animate-slide-in-up" style="animation-delay: 0.3s;">
+          The Ultimate SAMP Roleplay Experience
+        </p>
+        <div class="animate-slide-in-up" style="animation-delay: 0.6s;">
+          <button class="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 px-8 py-4 rounded-full text-xl font-bold animate-glow">
+            JOIN NOW - IP: 188.127.241.74:2159
+          </button>
         </div>
-    </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h2 class="orbitron text-4xl font-bold text-center mb-16 gradient-text">Server Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="glass-effect p-8 rounded-xl animate-slide-in-left floating">
+            <div class="text-4xl mb-4">
+              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-violet-300">Realistic Roleplay</h3>
+            <p class="text-violet-200">Immerse yourself in a realistic Los Santos with authentic roleplay scenarios and professional staff.</p>
+          </div>
+          <div class="glass-effect p-8 rounded-xl animate-slide-in-up floating" style="animation-delay: 0.2s;">
+            <div class="text-4xl mb-4">
+              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-violet-300">Professional Staff</h3>
+            <p class="text-violet-200">24/7 active administration ensuring fair gameplay and helping players with any issues.</p>
+          </div>
+          <div class="glass-effect p-8 rounded-xl animate-slide-in-right floating" style="animation-delay: 0.4s;">
+            <div class="text-4xl mb-4">
+              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-violet-300">Anti Cheat System</h3>
+            <p class="text-violet-200">Advanced anti-cheat protection ensuring fair gameplay for all players in our server.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-gradient-to-r from-violet-900/20 to-purple-900/20">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div class="animate-slide-in-up">
+            <div class="text-4xl font-bold gradient-text mb-2">400</div>
+            <div class="text-violet-300">Max Player</div>
+          </div>
+          <div class="animate-slide-in-up" style="animation-delay: 0.2s;">
+            <div class="text-4xl font-bold gradient-text mb-2">24/7</div>
+            <div class="text-violet-300">Server Uptime</div>
+          </div>
+          <div class="animate-slide-in-up" style="animation-delay: 0.4s;">
+            <div class="text-4xl font-bold gradient-text mb-2">50+</div>
+            <div class="text-violet-300">Custom Jobs</div>
+          </div>
+          <div class="animate-slide-in-up" style="animation-delay: 0.6s;">
+            <div class="text-4xl font-bold gradient-text mb-2">10+</div>
+            <div class="text-violet-300">Active Administrators</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- Projects Page -->
-<div id="projects-page" class="page">
-    <div class="min-h-screen py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold gradient-text mb-4">Meus Projetos</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">Explore meu portfólio de desenvolvimento</p>
-            </div>
+<!-- ABOUT PAGE -->
+<div id="about" class="page">
+  <div class="pt-20 min-h-screen">
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h1 class="orbitron text-5xl font-bold text-center mb-16 gradient-text animate-slide-in-up">About StarLight Roleplay</h1>
 
-            <!-- Project Categories -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="category-btn active bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors shadow-lg" data-category="all">
-                    <i class="fas fa-th-large mr-2"></i>Todos
-                </button>
-                <button class="category-btn bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 px-6 py-3 rounded-full hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors shadow-lg" data-category="java">
-                    <i class="fab fa-java mr-2"></i>Java/Apps
-                </button>
-                <button class="category-btn bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 px-6 py-3 rounded-full hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors shadow-lg" data-category="website">
-                    <i class="fas fa-globe mr-2"></i>Websites
-                </button>
-                <button class="category-btn bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 px-6 py-3 rounded-full hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors shadow-lg" data-category="bot">
-                    <i class="fab fa-discord mr-2"></i>Discord Bots
-                </button>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Java Projects -->
-                <div class="project-card java card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/BeForwardApp.png" alt="BeForwardApp Interface" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Java App
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">BeForwardApp</h3>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">Java</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Uma aplicação Java completa para gestão automotiva com rastreamento avançado de carros, gestão de inventário e análise de dados</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="beforward">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <button class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fab fa-github"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card java card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/EscolaSecundaria.png" alt="School Management Dashboard" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Java App
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">School Management</h3>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">Java</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Sistema de gestão educacional para escolas secundárias, otimizando matrículas de alunos, acompanhamento de notas e ferramentas administrativas.</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="school">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <button class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fab fa-github"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card java card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/LauncherApp.png" alt="Samp Launcher UI" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Java App
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">Samp Launchers</h3>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs font-semibold">Java</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Lançador de Samp com UI moderna, recursos de acesso rápido e ferramentas de otimização do sistema para maior produtividade.</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="samp">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <button class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fab fa-github"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Website Projects -->
-                <div class="project-card website card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/StarLight.png" alt="StarLight Roleplay Homepage" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Website
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">StarLight Roleplay</h3>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs font-semibold">Website</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Site que mostra todas as funcionalidades de um servidor Roleplay onde me identifico como Walter White</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="starlight">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <a href="https://quirson.github.io/StarLight-Roleplay/" target="_blank" class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card website card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/EuropaShit.png" alt="Europa Roleplay Website" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Website
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">Europa Roleplay</h3>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs font-semibold">Website</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Um dos melhores servidores Samp que já joguei. Fui desenvolvedor do site com ajuda da equipe.</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="europa">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <a href="https://europa-rp.com" target="_blank" class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bot Projects -->
-                <div class="project-card bot card-hover rounded-xl shadow-xl overflow-hidden">
-                    <div class="project-image-placeholder h-48 relative overflow-hidden">
-                        <img src="Imagens/ZenBot.png" alt="ZenBot Discord Dashboard" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2 bg-purple-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                            Discord Bot
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-xl font-bold">ZenBot</h3>
-                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-full text-xs font-semibold">Discord Bot</span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">Bot Discord multifuncional desenvolvido para melhorar a experiência do servidor com automação, moderação e recursos de entretenimento.</p>
-                        <div class="flex gap-2">
-                            <button class="view-project flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium" data-project="zenbot">
-                                <i class="fas fa-eye mr-2"></i>Ver Detalhes
-                            </button>
-                            <a href="https://zenbot4dc.web.app/" target="_blank" class="bg-gray-600 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="max-w-4xl mx-auto mb-20">
+          <div class="glass-effect p-8 rounded-xl animate-slide-in-up">
+            <p class="text-xl text-violet-200 leading-relaxed mb-6">
+              StarLight Roleplay is a premium SAMP server dedicated to providing the most authentic and immersive roleplay experience in Los Santos. Our community has been growing since our launch, bringing together passionate roleplayers from around the world.
+            </p>
+            <p class="text-xl text-violet-200 leading-relaxed">
+              With custom scripts, professional staff, and a commitment to quality roleplay, we've created an environment where every player can live their virtual life to the fullest. From law enforcement to criminal organizations, from business owners to everyday citizens - everyone has a place in our city.
+            </p>
+          </div>
         </div>
-    </div>
+
+        <h2 class="orbitron text-4xl font-bold text-center mb-16 gradient-text">Meet Our Team</h2>
+
+        <hr class="border-violet-500/30 mb-16">
+
+        <h3 class="orbitron text-3xl font-bold text-center mb-12 text-violet-300">Server Developers</h3>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Walter White -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left">
+            <div class="w-24 h-24 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Walter.png" alt="Walter White" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2 text-violet-300">Walter White</h3>
+            <p class="text-center text-violet-400 mb-2">Web Developer & Launcher Developer</p>
+            <p class="text-center text-violet-500 mb-4">Tech Admin</p>
+            <div class="flex justify-center space-x-3">
+              <a href="https://discord.com/users/quirson_ngale" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+              <a href="https://quirson.github.io/Portfolio/#" target="_blank" class="bg-violet-600 hover:bg-violet-700 p-2 rounded-lg transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Farawla Fruity -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-up" style="animation-delay: 0.1s;">
+            <div class="w-24 h-24 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Fruity.png" alt="Farawla Fruity" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2 text-violet-300">Farawla Fruity</h3>
+            <p class="text-center text-violet-400 mb-4">StarLight Founder</p>
+            <p class="text-center text-violet-500 mb-4">Lead Mapper</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/farafruity" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Crimson Crusher -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-right" style="animation-delay: 0.2s;">
+            <div class="w-24 h-24 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Crusher.png" alt="Crimson Crusher" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2 text-violet-300">Crimson Crusher</h3>
+            <p class="text-center text-violet-400 mb-4">StarLight Founder</p>
+            <p class="text-center text-violet-500 mb-4">Lead Developer</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/stkkaindlykeyein67" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- About Page -->
-<div id="about-page" class="page">
-    <div class="min-h-screen py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold gradient-text mb-4">Sobre Mim</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">Minha jornada na tecnologia</p>
+<!-- RULES PAGE -->
+<div id="rules" class="page">
+  <div class="pt-20 min-h-screen">
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h1 class="orbitron text-5xl font-bold text-center mb-16 gradient-text animate-slide-in-up">
+          Server Rulebook Dashboard
+        </h1>
+
+        <div class="rules-dashboard">
+          <!-- Sidebar Navigation -->
+          <div class="rules-sidebar">
+            <h3 class="orbitron text-xl font-bold mb-6 text-violet-300">Rule Categories</h3>
+
+            <div class="rules-category active" onclick="showRulesSection('cheats')">
+              <div class="rules-category-icon">
+                <svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                  <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-violet-200">Anti-Cheat System</h4>
+                <p class="text-xs text-violet-400">Detection & Punishments</p>
+              </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <div class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-gray-200 dark:border-dark-600">
-                        <h3 class="text-2xl font-bold mb-4 text-primary-600">O Início da Paixão</h3>
-                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                            Minha paixão pela tecnologia começou muito cedo, aos 4 anos de idade. Desde pequeno, sempre fui fascinado por videogames e pela forma como a tecnologia podia criar experiências incríveis. Essa curiosidade infantil se transformou numa verdadeira vocação.
-                        </p>
-                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                            Durante anos, atuei como mecânico de celulares, desenvolvendo habilidades práticas com hardware. Aprendi a abrir iPhones, Android, e trabalhar com todos os tipos de dispositivos móveis. Esta experiência me deu uma compreensão profunda tanto do hardware quanto do software.
-                        </p>
-                    </div>
+            <div class="rules-category" onclick="showRulesSection('communication')">
+              <div class="rules-category-icon">
+                <svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .6.4 1 1 1h.5c.2 0 .4-.1.5-.2L14.5 18H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-violet-200">Communication</h4>
+                <p class="text-xs text-violet-400">Chat & Behavior Rules</p>
+              </div>
+            </div>
 
-                    <div class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-gray-200 dark:border-dark-600">
-                        <h3 class="text-2xl font-bold mb-4 text-primary-600">Especialização em TI</h3>
-                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                            Como profissional de TI, domino uma ampla gama de tecnologias. Desde reparos complexos de dispositivos móveis até desenvolvimento de software avançado, sempre busco soluções inovadoras para cada desafio.
-                        </p>
-                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                            Atualmente, estudo Engenharia Informática no ISCTEM Fanzedo, onde aprimoro constantemente minhas habilidades em programação e desenvolvimento. Trabalho com mais de 4 linguagens de programação e estou sempre explorando novas tecnologias.
-                        </p>
-                    </div>
+            <div class="rules-category" onclick="showRulesSection('roleplay')">
+              <div class="rules-category-icon">
+                <svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-violet-200">Roleplay Standards</h4>
+                <p class="text-xs text-violet-400">RP Guidelines & Conduct</p>
+              </div>
+            </div>
+
+            <div class="rules-category" onclick="showRulesSection('account')">
+              <div class="rules-category-icon">
+                <svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 3.5C14.62 3.35 14.28 3.5 14.1 3.88L12.64 7.19C12.45 7.69 12.6 8.27 13 8.58L17 11.5V13L13.5 12L7 18L8.5 19.5L14.08 13.92L18 15L21 9Z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-violet-200">Account Rules</h4>
+                <p class="text-xs text-violet-400">Names & Account Policies</p>
+              </div>
+            </div>
+
+            <div class="rules-category" onclick="showRulesSection('exploitation')">
+              <div class="rules-category-icon">
+                <svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7V17C2 22.55 5.84 26.74 11 28C16.16 26.26 20 22.07 20 17V7L12 2M11 8H13V16H11V8M11 18H13V20H11V18Z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-violet-200">Serious Violations</h4>
+                <p class="text-xs text-violet-400">Exploits & Misconduct</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Area -->
+          <div class="rules-content-area">
+            <!-- Anti-Cheat Section -->
+            <div id="cheats-section" class="rules-section active">
+              <h2 class="orbitron text-3xl font-bold mb-6 gradient-text">Anti-Cheat Detection System</h2>
+              <p class="text-violet-200 mb-8">Our advanced anti-cheat system categorizes violations by severity and impact on gameplay.</p>
+
+              <div class="cheat-tier-card">
+                <div class="cheat-tier-header">
+                  <div class="cheat-tier-icon tier-lc">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2L2 7V17C2 22.55 5.84 26.74 11 28C16.16 26.26 20 22.07 20 17V7L12 2M10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-amber-300">LC - Light Cheats</h3>
+                    <p class="text-amber-200">Unfair advantage modifications</p>
+                  </div>
                 </div>
-
-                <!-- About Image -->
-                <div class="flex justify-center">
-                    <div class="relative">
-                        <div class="w-96 h-96 rounded-2xl bg-gradient-to-r from-primary-400 to-primary-600 p-4 floating-animation">
-                            <div class="w-full h-full rounded-xl bg-gray-300 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                                <img src="Imagens/NgaleJunior.jpg" alt="Quirson Fernando Ngale trabalhando" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-primary-500 rounded-full flex items-center justify-center animate-bounce">
-                            <i class="fas fa-mobile-alt text-white text-3xl"></i>
-                        </div>
-                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center animate-pulse">
-                            <i class="fas fa-gamepad text-white text-2xl"></i>
-                        </div>
-                    </div>
+                <div class="rules-grid">
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Aimbot Assistance</h4>
+                    <p class="text-violet-200 text-sm">Automated targeting systems</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Wall-Hack Vision</h4>
+                    <p class="text-violet-200 text-sm">See through walls/objects</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Visual CLEO Mods</h4>
+                    <p class="text-violet-200 text-sm">ESP and visual enhancement</p>
+                  </div>
                 </div>
+                <div class="mt-4 p-3 bg-amber-900/30 rounded-lg">
+                  <p class="text-amber-200 font-semibold">⚡ Punishment: 1 Day BAN</p>
+                </div>
+              </div>
+
+              <div class="cheat-tier-card">
+                <div class="cheat-tier-header">
+                  <div class="cheat-tier-icon tier-mc">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2L2 7V17C2 22.55 5.84 26.74 11 28C16.16 26.26 20 22.07 20 17V7L12 2M11 8H13V16H11V8M11 18H13V20H11V18Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-red-300">MC - Medium Cheats</h3>
+                    <p class="text-red-200">Gameplay disruption tools</p>
+                  </div>
+                </div>
+                <div class="rules-grid">
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Airbrake Movement</h4>
+                    <p class="text-violet-200 text-sm">Unrealistic movement speed</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Silent-Aim Targeting</h4>
+                    <p class="text-violet-200 text-sm">Hidden aim assistance</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Teleport Hacks</h4>
+                    <p class="text-violet-200 text-sm">Instant location changes</p>
+                  </div>
+                </div>
+                <div class="mt-4 p-3 bg-red-900/30 rounded-lg">
+                  <p class="text-red-200 font-semibold">🔥 Punishment: 3 Days BAN</p>
+                </div>
+              </div>
+
+              <div class="cheat-tier-card">
+                <div class="cheat-tier-header">
+                  <div class="cheat-tier-icon tier-rc">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2L2 7V17C2 22.55 5.84 26.74 11 28C16.16 26.26 20 22.07 20 17V7L12 2M12 8.5C10.07 8.5 8.5 10.07 8.5 12S10.07 15.5 12 15.5S15.5 13.93 15.5 12S13.93 8.5 12 8.5M12 13.5C11.17 13.5 10.5 12.83 10.5 12S11.17 10.5 12 10.5S13.5 11.17 13.5 12S12.83 13.5 12 13.5Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-red-400">RC - Rage Cheats</h3>
+                    <p class="text-red-200">Server destruction tools</p>
+                  </div>
+                </div>
+                <div class="rules-grid">
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">Rvanka Exploits</h4>
+                    <p class="text-violet-200 text-sm">Server crash attempts</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">D-Gun Weapons</h4>
+                    <p class="text-violet-200 text-sm">Destructive weapon mods</p>
+                  </div>
+                  <div class="rule-item">
+                    <h4 class="font-semibold text-violet-300 mb-2">CoordMaster Tools</h4>
+                    <p class="text-violet-200 text-sm">Advanced coordinate hacks</p>
+                  </div>
+                </div>
+                <div class="mt-4 p-3 bg-red-900/50 rounded-lg">
+                  <p class="text-red-200 font-semibold">💀 Punishment: 7 Days BAN + IP Block</p>
+                </div>
+              </div>
             </div>
+
+            <!-- Communication Section -->
+            <div id="communication-section" class="rules-section">
+              <h2 class="orbitron text-3xl font-bold mb-6 gradient-text">Communication Standards</h2>
+              <p class="text-violet-200 mb-8">Maintaining a respectful and professional environment for all players.</p>
+
+              <div class="rules-grid">
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🗣️ Insults Policy</h4>
+                  <ul class="text-violet-200 text-sm space-y-1">
+                    <li>• Relatives: 30-60m Mute</li>
+                    <li>• Staff: Warning</li>
+                    <li>• Server: 2d BAN</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">📢 Chat Violations</h4>
+                  <ul class="text-violet-200 text-sm space-y-1">
+                    <li>• CAPS: Verbal Warning</li>
+                    <li>• Flood: 10-15m Mute</li>
+                    <li>• Politics/Hate: 60m Mute</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">📋 Report Misuse</h4>
+                  <ul class="text-violet-200 text-sm space-y-1">
+                    <li>• False Report: 10m R-Mute</li>
+                    <li>• Admin Insult: Warning + Mute</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🚫 Misleading Staff</h4>
+                  <ul class="text-violet-200 text-sm space-y-1">
+                    <li>• Fake Hacks: 7d BAN</li>
+                    <li>• Lying to Staff: 1-7d BAN</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Roleplay Section -->
+            <div id="roleplay-section" class="rules-section">
+              <h2 class="orbitron text-3xl font-bold mb-6 gradient-text">Roleplay Standards</h2>
+              <p class="text-violet-200 mb-8">Guidelines for maintaining immersive and fair roleplay experiences.</p>
+
+              <div class="rules-grid">
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">⚔️ DM/VDM/TK/RK/SK</h4>
+                  <p class="text-violet-200 text-sm mb-2">Unjustified killing violations</p>
+                  <ul class="text-violet-200 text-xs space-y-1">
+                    <li>• Single: 30-60m Jail</li>
+                    <li>• Mass (3+): 60m Jail → 1-2d BAN</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🚗 DB (Drive-by)</h4>
+                  <p class="text-violet-200 text-sm mb-2">Drive-by without RP reason</p>
+                  <ul class="text-violet-200 text-xs space-y-1">
+                    <li>• Standard: 30-60m Jail</li>
+                    <li>• Armed Vehicles: 120m Jail</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🎭 PG (Powergaming)</h4>
+                  <p class="text-violet-200 text-sm mb-2">Unrealistic roleplay actions</p>
+                  <p class="text-violet-400 text-xs">Punishment: 30m Jail</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🏃 LTA (Leave to Avoid)</h4>
+                  <p class="text-violet-200 text-sm mb-2">Leaving to avoid consequences</p>
+                  <p class="text-violet-400 text-xs">Punishment: 60m Jail</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account Section -->
+            <div id="account-section" class="rules-section">
+              <h2 class="orbitron text-3xl font-bold mb-6 gradient-text">Account Policies</h2>
+              <p class="text-violet-200 mb-8">Account management and naming conventions for our server.</p>
+
+              <div class="rules-grid">
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">👤 Name Format</h4>
+                  <p class="text-violet-200 text-sm mb-2">Required: Name_Surname</p>
+                  <p class="text-violet-400 text-xs">Non-RP names allowed only outside major factions</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🔄 Multi-Account</h4>
+                  <p class="text-violet-200 text-sm mb-2">One account per person</p>
+                  <p class="text-red-400 text-xs">Punishment: 1d BAN</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">💰 Economy Abuse</h4>
+                  <p class="text-violet-200 text-sm mb-2">Exploiting economic systems</p>
+                  <p class="text-red-400 text-xs">Punishment: 1d BAN</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🚫 Ban Evasion</h4>
+                  <p class="text-violet-200 text-sm mb-2">Creating new accounts to bypass bans</p>
+                  <p class="text-red-400 text-xs">Punishment: 2d BAN</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exploitation Section -->
+            <div id="exploitation-section" class="rules-section">
+              <h2 class="orbitron text-3xl font-bold mb-6 gradient-text">Serious Violations</h2>
+              <p class="text-violet-200 mb-8">Severe misconduct that threatens server integrity and community safety.</p>
+
+              <div class="rules-grid">
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🐛 Bug Exploitation</h4>
+                  <ul class="text-violet-200 text-sm space-y-1">
+                    <li>• Game bugs: 20-120m Jail</li>
+                    <li>• Economy bugs: 1d BAN</li>
+                  </ul>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🤖 Botting</h4>
+                  <p class="text-violet-200 text-sm mb-2">Automated gameplay</p>
+                  <p class="text-red-400 text-xs">Punishment: 60-120m Jail</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">💸 Scamming</h4>
+                  <p class="text-violet-200 text-sm mb-2">Fraudulent transactions</p>
+                  <p class="text-red-400 text-xs">Punishment: 120m Jail</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🎭 Impersonation</h4>
+                  <p class="text-violet-200 text-sm mb-2">Impersonating staff members</p>
+                  <p class="text-red-400 text-xs">Punishment: 120m Jail + Mute</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">⚡ Blackmail</h4>
+                  <p class="text-violet-200 text-sm mb-2">Threatening or extorting players</p>
+                  <p class="text-red-400 text-xs">Punishment: 3d BAN</p>
+                </div>
+                <div class="rule-item">
+                  <h4 class="font-semibold text-violet-300 mb-2">🚫 Nazi Content</h4>
+                  <p class="text-violet-200 text-sm mb-2">Hate symbols or content</p>
+                  <p class="text-red-400 text-xs">Punishment: 120m Mute</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- Contact Page -->
-<div id="contact-page" class="page">
-    <div class="min-h-screen py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold gradient-text mb-4">Entre em Contato</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">Vamos trabalhar juntos!</p>
+<!-- ADMINS PAGE -->
+<div id="admins" class="page">
+  <div class="pt-20 min-h-screen">
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h1 class="orbitron text-5xl font-bold text-center mb-16 gradient-text animate-slide-in-up">Server Administrators</h1>
+
+        <!-- HIGH STAFF ADMINISTRATORS -->
+        <h2 class="orbitron text-3xl font-bold text-center mb-12 text-violet-400">HIGH STAFF ADMINISTRATORS</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <!-- Dmitry V.Stalin -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Dmitry.gif" alt="Dmitry V.Stalin" class="w-full h-full object-cover">
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="https://github.com/Quirson" target="_blank" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fab fa-github text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">GitHub</h3>
-                        <p class="text-gray-600 dark:text-gray-300">github.com/Quirson</p>
-                    </div>
-                </a>
-
-                <a href="mailto:quirsonngale@gmail.com" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-envelope text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Email</h3>
-                        <p class="text-gray-600 dark:text-gray-300">quirsonngale@gmail.com</p>
-                    </div>
-                </a>
-
-                <a href="https://linkedin.com/in/quirson-fernando-ngale-97a4a3375" target="_blank" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fab fa-linkedin text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">LinkedIn</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Quirson Fernando Ngale</p>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/message/XWI7LP5B25HUO1" target="_blank" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fab fa-whatsapp text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">WhatsApp</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Mensagem Direta</p>
-                    </div>
-                </a>
-
-                <a href="https://t.me/Quirsonngale" target="_blank" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fab fa-telegram text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Telegram</h3>
-                        <p class="text-gray-600 dark:text-gray-300">t.me/Quirsonngale</p>
-                    </div>
-                </a>
-
-                <a href="https://reddit.com/u/Quirson_Ngale" target="_blank" class="contact-card bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 border border-gray-200 dark:border-dark-600">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fab fa-reddit text-white text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Reddit</h3>
-                        <p class="text-gray-600 dark:text-gray-300">u/Quirson_Ngale</p>
-                    </div>
-                </a>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Dmitry V.Stalin</h3>
+            <p class="text-center text-violet-400 text-sm mb-2">Community Manager</p>
+            <p class="text-center text-violet-500 text-xs mb-4">Who leads the community to being united and manages all community activities</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/karthik2404" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
             </div>
+          </div>
+
+          <!-- Egbal Shadow -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-up" style="animation-delay: 0.1s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/EgbalGif.gif" alt="Egbal Shadow" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Egbal Shadow</h3>
+            <p class="text-center text-violet-400 text-sm mb-2">Community Monitor</p>
+            <p class="text-center text-violet-500 text-xs mb-4">Who helps the manager and sends reports about community activities</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/egbalshadow" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Shadow Walker -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-right" style="animation-delay: 0.2s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/ShadowWalker.png" alt="Shadow Walker" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Shadow Walker</h3>
+            <p class="text-center text-violet-400 text-sm mb-2">Staff Manager</p>
+            <p class="text-center text-violet-500 text-xs mb-4">Who manages all staff members and ensures proper administration</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/shadowwalker981" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Mike Culler -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left" style="animation-delay: 0.3s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/m16.4.png" alt="Mike Culler" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Mike Culler</h3>
+            <p class="text-center text-violet-400 text-sm mb-2">Staff Monitor</p>
+            <p class="text-center text-violet-500 text-xs mb-4">Who monitors staff performance and assists the staff manager</p>
+            <div class="flex justify-center">
+              <a href="https://discord.com/users/m16.4" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-    </div>
+
+        <!-- GENERAL ADMINS -->
+        <h2 class="orbitron text-3xl font-bold text-center mb-12 text-violet-300">General Admins</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Aero Mint -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Aero.jpg" alt="Aero Mint" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Aero Mint</h3>
+            <p class="text-center text-violet-400 text-sm">Senior Server Mapper</p>
+            <div class="flex justify-center mt-3">
+              <a href="https://discord.com/users/aero_boi3896" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Skyler_Etc -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-up" style="animation-delay: 0.1s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Skyler.jpg" alt="Skyler_Etc" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Skyler_Etc</h3>
+            <p class="text-center text-violet-400 text-sm">Faction Manager</p>
+            <div class="flex justify-center mt-3">
+              <a href="https://discord.com/users/energeticlatern" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+
+          <!-- Vortex ratman -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left" style="animation-delay: 0.3s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Vortex.jpg" alt="Vortex ratman" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Vortex ratman</h3>
+            <p class="text-center text-violet-400 text-sm">General Administrator</p>
+          </div>
+
+          <!-- Apela TD -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left" style="animation-delay: 0.3s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Apela.jpg" alt="Vortex ratman" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Apela TD</h3>
+            <p class="text-center text-violet-400 text-sm">Trial Administrator</p>
+          </div>
+
+          <!-- Kemo Deep -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-up" style="animation-delay: 0.4s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Kemo.gif" alt="Kemo Deep" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Kemo Deep</h3>
+            <p class="text-center text-violet-400 text-sm">Senior Administrator</p>
+          </div>
+
+          <!-- Ash Davolt -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left" style="animation-delay: 0.3s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Ash.gif" alt="Vortex ratman" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Ash Davolt</h3>
+            <p class="text-center text-violet-400 text-sm">Server Scriper</p>
+          </div>
+
+          <!-- Klone_Bee -->
+          <div class="team-card p-6 rounded-xl animate-slide-in-left" style="animation-delay: 0.3s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full mx-auto mb-4 overflow-hidden">
+              <img src="img/Klone.png" alt="Vortex ratman" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-lg font-bold text-center mb-2 text-violet-300">Klone Bee</h3>
+            <p class="text-center text-violet-400 text-sm">Server Mapper</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- Project Modal -->
-<div id="projectModal" class="modal">
-    <span class="close">&times;</span>
-    <div class="modal-content bg-white/95 dark:bg-dark-800/95 backdrop-blur-sm border border-gray-200 dark:border-dark-600">
-        <div id="modalContent">
-            <!-- Dynamic content will be loaded here -->
+<!-- CONTACTS PAGE -->
+<div id="contacts" class="page">
+  <div class="pt-20 min-h-screen">
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h1 class="orbitron text-5xl font-bold text-center mb-16 gradient-text animate-slide-in-up">Contact Us</h1>
+
+        <div class="max-w-2xl mx-auto">
+          <div class="glass-effect p-8 rounded-xl animate-slide-in-up">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl font-bold mb-4 text-violet-300">Get in Touch</h2>
+              <p class="text-violet-200">Join our community and stay connected with StarLight Roleplay</p>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Discord -->
+              <div class="flex items-center justify-between p-6 bg-violet-900/30 rounded-lg hover:bg-violet-900/50 transition-all duration-300">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-violet-300">Discord Server</h3>
+                    <p class="text-violet-400">Join our community</p>
+                  </div>
+                </div>
+                <a href="https://discord.gg/bjT3aetusu" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-lg font-semibold transition-colors">
+                  Join Now
+                </a>
+              </div>
+
+              <!-- Telegram -->
+              <div class="flex items-center justify-between p-6 bg-violet-900/30 rounded-lg hover:bg-violet-900/50 transition-all duration-300">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-violet-300">Telegram</h3>
+                    <p class="text-violet-400">Join our channel</p>
+                  </div>
+                </div>
+                <a href="https://t.me/StarlightRPofficial" target="_blank" class="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-lg font-semibold transition-colors">
+                  Join Now
+                </a>
+              </div>
+            </div>
+            <div class="mt-8 text-center">
+              <div class="glass-effect p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-2 text-violet-300">Server Information</h3>
+                <p class="text-violet-200 mb-2">Server IP: <span class="font-mono bg-violet-900/50 px-2 py-1 rounded">188.127.241.74:2159</span></p>
+                <p class="text-violet-400 text-sm">Copy the IP and connect through SA-MP client</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+  </div>
 </div>
+
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full bg-gradient-to-r from-violet-900/90 to-purple-900/90 backdrop-blur-md border-t border-violet-500/30 z-40">
+  <div class="container mx-auto px-6 py-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-6">
+        <div class="text-sm text-violet-300">
+          <span class="font-semibold">400</span> Max Players
+        </div>
+        <div class="text-sm text-violet-300">
+          <span class="font-semibold">10+</span> Active Administrators
+        </div>
+        <a href="https://discord.gg/bjT3aetusu" target="_blank" class="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded-lg transition-colors">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span class="text-white text-sm">Discord</span>
+        </a>
+      </div>
+      <div class="text-sm text-violet-400">
+        Made With Much ❤️  by <a href="https://discord.com/users/quirson_ngale" target="_blank" class="text-violet-300 hover:text-violet-200 font-semibold">Walter White</a> - Simplicity is the soul of efficiency
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-    // Page Navigation System
+  function showPage(pageId) {
+    // Hide all pages
     const pages = document.querySelectorAll('.page');
-    const navLinks = document.querySelectorAll('[data-page]');
-
-    function showPage(pageId) {
-        pages.forEach(page => {
-            page.classList.remove('active');
-        });
-        document.getElementById(pageId + '-page').classList.add('active');
-
-        // Update active nav link
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('data-page') === pageId) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const pageId = link.getAttribute('data-page');
-            showPage(pageId);
-
-            // Close mobile menu if open
-            document.getElementById('mobile-nav').classList.add('hidden');
-        });
+    pages.forEach(page => {
+      page.classList.remove('active');
     });
 
-    // Theme System
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeDropdown = document.getElementById('theme-dropdown');
-    const html = document.documentElement;
+    // Show selected page
+    document.getElementById(pageId).classList.add('active');
 
-    // Check for saved theme preference
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    if (currentTheme === 'dark') {
-        html.classList.add('dark');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        themeDropdown.classList.toggle('show');
+    // Update navigation buttons
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+      button.classList.remove('bg-violet-600');
+      button.classList.add('bg-violet-800');
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
-            themeDropdown.classList.remove('show');
-        }
+    // Highlight active button
+    event.target.classList.remove('bg-violet-800');
+    event.target.classList.add('bg-violet-600');
+  }
+
+  // Initialize page
+  document.addEventListener('DOMContentLoaded', function() {
+    showPage('home');
+  });
+
+  // Add some interactive effects
+  document.addEventListener('mousemove', function(e) {
+    const stars = document.querySelectorAll('.star');
+    stars.forEach((star, index) => {
+      const speed = (index + 1) * 0.0001;
+      const x = e.clientX * speed;
+      const y = e.clientY * speed;
+      star.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  });
+  function showRulesSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.rules-section');
+    sections.forEach(section => {
+      section.classList.remove('active');
     });
 
-    // Theme options
-    document.querySelectorAll('.theme-option').forEach(option => {
-        option.addEventListener('click', () => {
-            const theme = option.getAttribute('data-theme');
+    // Show selected section
+    document.getElementById(sectionId + '-section').classList.add('active');
 
-            // Remove all theme classes
-            html.classList.remove('dark');
-
-            // Apply selected theme
-            if (theme === 'dark') {
-                html.classList.add('dark');
-            }
-
-            localStorage.setItem('theme', theme);
-            themeDropdown.classList.remove('show');
-        });
+    // Update category buttons
+    const categories = document.querySelectorAll('.rules-category');
+    categories.forEach(category => {
+      category.classList.remove('active');
     });
 
-    // Mobile Menu Toggle
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNav = document.getElementById('mobile-nav');
+    // Highlight active category
+    event.target.closest('.rules-category').classList.add('active');
+  }
 
-    mobileMenu.addEventListener('click', () => {
-        mobileNav.classList.toggle('hidden');
-    });
-
-    // Project Filtering
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Update active button
-            categoryBtns.forEach(b => {
-                b.classList.remove('active', 'bg-primary-600', 'text-white');
-                b.classList.add('bg-white/80', 'dark:bg-dark-700/80', 'text-gray-700', 'dark:text-gray-300');
-            });
-            btn.classList.add('active', 'bg-primary-600', 'text-white');
-            btn.classList.remove('bg-white/80', 'dark:bg-dark-700/80', 'text-gray-700', 'dark:text-gray-300');
-
-            // Filter projects
-            const category = btn.getAttribute('data-category');
-            projectCards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-
-    // Project Modal
-    const modal = document.getElementById('projectModal');
-    const modalContent = document.getElementById('modalContent');
-    const closeBtn = document.querySelector('.close');
-    const viewProjectBtns = document.querySelectorAll('.view-project');
-
-    const projectData = {
-        beforward: {
-            title: 'BeForwardApp',
-            description: 'Uma aplicação Java completa para gestão automotiva com rastreamento avançado de carros, gestão de inventário e análise de dados',
-            features: ['Leitura De Clientes Apartir de Um Ficheiro de texto','Gestao de Invetario Completa','Analise de Clientes Avancado','Interface moderna e intuitiva','Relatórios automáticos','Sistema de notificações '],
-            tech: ['Java','JavaFx','ArrayList','API'],
-            images: [
-                'Imagens/LoginBeForward.png',
-                'Imagens/NovoCliente.png',
-                'Imagens/VisulBe.png',
-                'Imagens/BeForwardVideo.png',
-                'Imagens/Orcamento.png',
-                'Imagens/InfoBe.png',
-                'Imagens/Aduaneiros.png',
-                'Imagens/RemB.png'
-            ]
-        },
-        school: {
-            // ... outros dados
-            title: 'School Management',
-            description: 'Uma Aplicacao Capaz de gerenciar uma Escola, Seus Professores , seus Alunos e Seus Funcionarios',
-            features: ['Base Dados de Estudantes','Gestao de Alunos Por Professor / Turma','Gestao de Professores em tempo Real','Chat Em tempo Real'],
-            tech: ['Java','JavaFx','MySQL','API'],
-            images: [
-                'Imagens/GestaoAlunos.png',
-                'Imagens/MainGUI.png',
-                'Imagens/GestaoProfessores.png',
-                'Imagens/LoginSchool.png',
-                'Imagens/NotasAvaliacoes.png',
-                'Imagens/HorariosPlanos.png'
-            ]
-        },
-        samp: {
-            title: 'Samp Lauchers',
-            description: 'Uma Aplicacao Capaz de Rodar um Serivdor Samp Com Mods [AINDA EM DESENVOLVIMENTO]',
-            features: ['Base de Dados de Jogadores','Client Samp','Carros Realistas'],
-            tech: ['Java','JavaFx','MySQL','API'],
-            images: [
-                'Imagens/GestaoSampppppppp.png',
-                'Imagens/GestaoSamppppppppp.png',
-                'Imagens/GestaoSamppppppppppp.png',
-                'Imagens/GestaoSampppppppp.png',
-                'Imagens/GestaoSamppppppppppp.png'
-
-            ]
-        },
-        starlight: {
-            title: 'Starlight',
-            description: 'Site que mostra todas as funcionalidades de um servidor Roleplay onde me identifico como Walter White',
-            features: ['Uma Pagina Home ','Site Estatico','Links de Discord'],
-            tech: ['HTML5','CSS3','Javascript','PHP','MySQL'],
-            images: [
-                'Imagens/Site1.png',
-                'Imagens/Site2.png',
-                'Imagens/Site3.png',
-                'Imagens/Site4.png',
-                'Imagens/Site5.png',
-                'Imagens/Site6.png',
-            ]
-
-        },
-        europa: {
-            title: 'Europa',
-            description: 'Site que mostra todas as funcionalidades de um servidor Roleplay onde me identifico como Walter White',
-            features: ['Uma Pagina Home ','Site Estatico','Links de Discord'],
-            tech: ['HTML5','CSS3','Javascript','PHP','MySQL'],
-            images: [
-                'Imagens/Europa1.png',
-                'Imagens/Europa2.png',
-                'Imagens/Europa3.png',
-                'Imagens/Europa4.png',
-                'Imagens/Europa5.png',
-                'Imagens/Europa6.png'
-            ]
-
-        },
-        zenbot: {
-            title: 'Zenbot Discord',
-            description: 'Bot Discord multifuncional desenvolvido para melhorar a experiência do servidor com automação, moderação e recursos de entretenimento.',
-            features: ['Moderacao Automatica', 'Comandos Automaticos','Gestao de Servidores'],
-            tech: ['Python','Discord.py','SQL'],
-            images: [
-                'Imagens/Zen1.png',
-                'Imagens/Zen2.png',
-                'Imagens/Zen3.png',
-                'Imagens/Zen4.png'
-            ]
-        }
-    };
-
-    viewProjectBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const project = btn.getAttribute('data-project');
-            const data = projectData[project];
-
-            modalContent.innerHTML = `
-                    <h2 class="text-3xl font-bold gradient-text mb-6">${data.title}</h2>
-                    <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg leading-relaxed">${data.description}</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div class="bg-gray-50 dark:bg-dark-700 p-6 rounded-lg">
-                            <h3 class="text-xl font-bold mb-4 text-primary-600">
-                                <i class="fas fa-star mr-2"></i>Funcionalidades
-                            </h3>
-                            <ul class="space-y-3">
-                                ${data.features.map(feature => `
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                                        <span>${feature}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-dark-700 p-6 rounded-lg">
-                            <h3 class="text-xl font-bold mb-4 text-primary-600">
-                                <i class="fas fa-code mr-2"></i>Tecnologias
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
-                                ${data.tech.map(tech => `
-                                    <span class="bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-3 py-2 rounded-full text-sm font-medium">
-                                        ${tech}
-                                    </span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 class="text-lg font-semibold mb-2 text-red-700 dark:text-red-300">Galeria de Imagens</h4>
-                    <div class="carousel-container relative overflow-hidden rounded-lg bg-black/5 dark:bg-black/20">
-                        <div class="carousel-wrapper relative h-80">
-                           <div class="carousel-track flex transition-transform duration-500 ease-in-out h-full" id="carousel-track-${project}">
-                              ${data.images ? data.images.map((img, index) => `
-                                 <div class="carousel-slide flex-shrink-0 w-full h-full relative">
-                                    <img src="${img}" alt="Screenshot ${index + 1} do projeto ${data.title}"
-                                       class="w-full h-full object-contain rounded-lg cursor-zoom-in"
-                                       onclick="openImageModal('${img}')">
-                                    <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
-                                      ${index + 1} / ${data.images.length}
-                                    </div>
-                                 </div>
-                              `).join('') : '<div class="carousel-slide flex-shrink-0 w-full h-full flex items-center justify-center"><p class="text-gray-500">Imagens em breve...</p></div>'}
-                           </div>
-
-                           <!-- Controles de navegação -->
-                          <button class="carousel-btn carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 dark:bg-black/90 text-gray-800 dark:text-white w-12 h-12 rounded-full shadow-lg hover:bg-white dark:hover:bg-black transition-all z-10" onclick="moveCarousel('${project}', -1)">
-                            <i class="fas fa-chevron-left"></i>
-                          </button>
-                          <button class="carousel-btn carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 dark:bg-black/90 text-gray-800 dark:text-white w-12 h-12 rounded-full shadow-lg hover:bg-white dark:hover:bg-black transition-all z-10" onclick="moveCarousel('${project}', 1)">
-                            <i class="fas fa-chevron-right"></i>
-                          </button>
-                        </div>
-
-                          <!-- Indicadores -->
-                         <div class="carousel-indicators flex justify-center space-x-2 mt-4">
-                           ${data.images ? data.images.map((_, index) => `
-                             <button class="indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-red-500 transition-colors ${index === 0 ? 'bg-red-500' : ''}"
-                                 onclick="goToSlide('${project}', ${index})"
-                                 data-slide="${index}"></button>
-                           `).join('') : ''}
-                         </div>
-                    </div>
-                  </div>
-                `;
-
-            modal.style.display = 'block';
-        });
-    });
-
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // Scroll animations for project cards
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe all cards
-    document.querySelectorAll('.card-hover, .contact-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-    function openImageModal(imgSrc) {
-        const imageModal = document.createElement('div');
-        imageModal.className = 'image-modal';
-        imageModal.style.display = 'block';
-        imageModal.innerHTML = `
-        <span style="position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
-        <img src="${imgSrc}" alt="Imagem ampliada">
-    `;
-
-        document.body.appendChild(imageModal);
-
-        imageModal.onclick = function() {
-            document.body.removeChild(imageModal);
-        };
-    }
-    let currentSlides = {};
-
-    function moveCarousel(project, direction) {
-        const track = document.getElementById(`carousel-track-${project}`);
-        const slides = track.children;
-        const totalSlides = slides.length;
-
-        if (!currentSlides[project]) currentSlides[project] = 0;
-
-        currentSlides[project] += direction;
-
-        // Loop infinito
-        if (currentSlides[project] >= totalSlides) {
-            currentSlides[project] = 0;
-        } else if (currentSlides[project] < 0) {
-            currentSlides[project] = totalSlides - 1;
-        }
-
-        // Aplicar transformação
-        track.style.transform = `translateX(-${currentSlides[project] * 100}%)`;
-
-        // Atualizar indicadores
-        updateIndicators(project);
-    }
-
-    function goToSlide(project, slideIndex) {
-        const track = document.getElementById(`carousel-track-${project}`);
-        currentSlides[project] = slideIndex;
-
-        track.style.transform = `translateX(-${slideIndex * 100}%)`;
-        updateIndicators(project);
-    }
-
-    function updateIndicators(project) {
-        const indicators = document.querySelectorAll(`[onclick*="${project}"][data-slide]`);
-        indicators.forEach((indicator, index) => {
-            if (index === currentSlides[project]) {
-                indicator.classList.remove('bg-gray-300', 'dark:bg-gray-600');
-                indicator.classList.add('bg-red-500');
-            } else {
-                indicator.classList.remove('bg-red-500');
-                indicator.classList.add('bg-gray-300', 'dark:bg-gray-600');
-            }
-        });
-    }
-
-    // Suporte para navegação por teclado
-    document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'block') {
-            const currentProject = Object.keys(currentSlides)[Object.keys(currentSlides).length - 1];
-            if (e.key === 'ArrowLeft') {
-                moveCarousel(currentProject, -1);
-            } else if (e.key === 'ArrowRight') {
-                moveCarousel(currentProject, 1);
-            }
-        }
-    });
-
-    // Inicializar slide atual quando modal abre
-    const originalViewProjectHandler = viewProjectBtns.forEach;
-    viewProjectBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const project = btn.getAttribute('data-project');
-            currentSlides[project] = 0; // Reset para primeiro slide
-        });
-    });
+  // Initialize rules dashboard
+  document.addEventListener('DOMContentLoaded', function() {
+    // Any additional initialization can go here
+  });
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'964a48e2256e7390',t:'MTc1MzQzMjExNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9645f65690244ec6',t:'MTc1MzM4Njc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
