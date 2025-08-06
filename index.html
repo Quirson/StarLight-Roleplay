@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>StarLight Roleplay - SAMP Server</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* SUBSTITUA TODO O CSS DENTRO DA TAG <style> POR ESTE CÓDIGO ATUALIZADO */
+
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
     :root {
@@ -29,7 +34,7 @@
       display: none;
       min-height: 100vh;
       animation: fadeIn 0.8s ease-in-out;
-      padding-bottom: 80px;
+      padding-bottom: 100px; /* Aumentado para mobile */
     }
 
     .page.active {
@@ -162,6 +167,7 @@
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
     }
+
     .rules-dashboard {
       display: grid;
       grid-template-columns: 300px 1fr;
@@ -298,17 +304,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 768px) {
-      .rules-dashboard {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
-      .rules-sidebar {
-        position: static;
-        order: 2;
-      }
-    }
     /* Login Modal */
     .modal-overlay {
       display: none;
@@ -335,6 +330,8 @@
       text-align: center;
       box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3);
       animation: slideInScale 0.4s ease-out;
+      width: 90%;
+      max-width: 400px;
     }
 
     @keyframes slideInScale {
@@ -364,69 +361,6 @@
 
     .close-modal:hover { color: #8b5cf6; }
 
-    /* Enhanced Mobile Responsiveness */
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .nav-buttons {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      .nav-button {
-        font-size: 14px;
-        padding: 8px 12px;
-      }
-
-      .hero-title {
-        font-size: 2.5rem !important;
-      }
-
-      .hero-subtitle {
-        font-size: 1.2rem !important;
-      }
-
-      .modal-content {
-        width: 90%;
-        padding: 1.5rem;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-
-      .admin-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .admin-high-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2rem !important;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .admin-high-grid {
-        grid-template-columns: 1fr !important;
-      }
-    }
-
     /* Dynamic Animations */
     .pulse-glow {
       animation: pulseGlow 2s infinite;
@@ -453,6 +387,279 @@
       50% { transform: translateY(0); }
       75% { transform: translateY(-3px); }
     }
+
+    /* ===== MOBILE RESPONSIVO MELHORADO ===== */
+
+    /* Tablets - 768px e abaixo */
+    @media (max-width: 768px) {
+      /* Navegação */
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .nav-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .nav-button {
+        font-size: 13px;
+        padding: 8px 14px;
+        min-width: 70px;
+      }
+
+      /* Hero Section */
+      .hero-title {
+        font-size: 2.8rem !important;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem !important;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Features Grid */
+      .feature-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+      }
+
+      /* Stats Grid */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+      }
+
+      /* Rules Dashboard */
+      .rules-dashboard {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .rules-sidebar {
+        position: static;
+        order: 2;
+        padding: 1rem;
+      }
+
+      .rules-content-area {
+        padding: 1.5rem;
+      }
+
+      .rules-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+      }
+
+      /* Admin Grids */
+      .admin-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+      }
+
+      .admin-high-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+      }
+
+      /* Team Cards */
+      .team-card {
+        padding: 1rem;
+      }
+
+      .team-card:hover {
+        transform: translateY(-5px) scale(1.01);
+      }
+
+      /* Modal */
+      .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      /* Container padding */
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      /* Sections padding */
+      section {
+        padding: 3rem 0;
+      }
+
+      /* Footer adjustment */
+      footer {
+        position: static;
+        margin-top: 2rem;
+      }
+
+      .page {
+        padding-bottom: 2rem;
+      }
+    }
+
+    /* Mobile pequeno - 480px e abaixo */
+    @media (max-width: 480px) {
+      /* Hero adjustments */
+      .hero-title {
+        font-size: 2.2rem !important;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem !important;
+      }
+
+      /* Navigation mais compacta */
+      .nav-button {
+        font-size: 12px;
+        padding: 6px 10px;
+        min-width: 65px;
+      }
+
+      /* Single column layouts */
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+      }
+
+      .admin-high-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .admin-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Rules categories mobile-friendly */
+      .rules-category {
+        padding: 0.8rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .rules-category-icon {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.8rem;
+      }
+
+      /* Cheat tier cards */
+      .cheat-tier-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .cheat-tier-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      /* Container extra small */
+      .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
+      /* Smaller text sizes */
+      h1 {
+        font-size: 2rem !important;
+      }
+
+      h2 {
+        font-size: 1.75rem !important;
+      }
+
+      h3 {
+        font-size: 1.25rem !important;
+      }
+
+      /* Footer mobile */
+      footer .container > div {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      footer .flex.items-center.space-x-6 {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Mobile extra pequeno - 360px e abaixo */
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: 1.8rem !important;
+      }
+
+      .nav-buttons {
+        gap: 0.3rem;
+      }
+
+      .nav-button {
+        font-size: 11px;
+        padding: 5px 8px;
+        min-width: 60px;
+      }
+
+      .modal-content {
+        width: 98%;
+        padding: 1rem;
+      }
+
+      .team-card {
+        padding: 0.8rem;
+      }
+
+      .cheat-tier-card {
+        padding: 0.8rem;
+      }
+
+      .rules-content-area {
+        padding: 1rem;
+      }
+    }
+
+    /* Melhorias específicas para touch */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-button:hover::before {
+        display: none;
+      }
+
+      .team-card:hover {
+        transform: none;
+      }
+
+      .rule-block:hover {
+        transform: none;
+      }
+
+      .bounce-hover:hover {
+        animation: none;
+      }
+
+      /* Aumentar áreas de toque */
+      .nav-button {
+        min-height: 44px;
+      }
+
+      .close-modal {
+        min-width: 44px;
+        min-height: 44px;
+      }
+
+      button {
+        min-height: 44px;
+      }
+    }
   </style>
 </head>
 <body class="text-white">
@@ -466,25 +673,25 @@
   <div class="star w-1 h-1" style="top: 70%; left: 5%; animation-delay: 2.5s;"></div>
 </div>
 
-<!-- Navigation -->
 <nav class="fixed top-0 w-full z-50 glass-effect">
-  <div class="container mx-auto px-6 py-4">
+  <div class="container mx-auto px-4 py-3">
     <div class="flex items-center justify-between nav-container">
-      <div class="flex items-center space-x-3">
-        <img src="img/Logo.png" alt="StarLight Logo" class="w-10 h-10 rounded-full border-2 border-violet-400">
-        <div class="orbitron text-2xl font-bold gradient-text animate-pulse-custom">
-          StarLight Roleplay
+      <div class="flex items-center space-x-2">
+        <img src="img/Logo.png" alt="StarLight Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-violet-400">
+        <div class="orbitron text-lg sm:text-2xl font-bold gradient-text animate-pulse-custom">
+          <span class="hidden sm:inline">StarLight Roleplay</span>
+          <span class="sm:hidden">StarLight RP</span>
         </div>
       </div>
-      <div class="flex items-center space-x-4">
-        <div class="flex space-x-6 nav-buttons">
-          <button onclick="showPage('home')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover">Home</button>
-          <button onclick="showPage('about')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover">About</button>
-          <button onclick="showPage('rules')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover">Rules</button>
-          <button onclick="showPage('admins')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover">Admins</button>
-          <button onclick="showPage('contacts')" class="nav-button px-4 py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover">Contacts</button>
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <div class="flex flex-wrap justify-center space-x-2 sm:space-x-6 nav-buttons">
+          <button onclick="showPage('home')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Home</button>
+          <button onclick="showPage('about')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">About</button>
+          <button onclick="showPage('rules')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Rules</button>
+          <button onclick="showPage('admins')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Admins</button>
+          <button onclick="showPage('contacts')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Contacts</button>
         </div>
-        <button onclick="showLoginModal()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-4 py-2 rounded-lg font-semibold pulse-glow transition-all duration-300">
+        <button onclick="showLoginModal()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-2 py-1 sm:px-4 sm:py-2 rounded-lg font-semibold pulse-glow transition-all duration-300 text-xs sm:text-sm">
           Login
         </button>
       </div>
@@ -496,82 +703,83 @@
 <div id="home" class="page active">
   <div class="pt-20 min-h-screen">
     <!-- Hero Section -->
-    <section class="relative py-20 overflow-hidden">
-      <div class="container mx-auto px-6 text-center">
-        <div class="flex items-center justify-center space-x-6 mb-8">
-          <img src="img/Logo.png" alt="StarLight Logo" class="w-20 h-20 rounded-full border-4 border-violet-400 pulse-glow">
-          <h1 class="orbitron text-6xl font-black gradient-text animate-slide-in-up hero-title">
+    <section class="relative py-10 sm:py-20 overflow-hidden">
+      <div class="container mx-auto px-4 sm:px-6 text-center">
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8">
+          <img src="img/Logo.png" alt="StarLight Logo" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-violet-400 pulse-glow">
+          <h1 class="orbitron text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black gradient-text animate-slide-in-up hero-title text-center">
             STARLIGHT ROLEPLAY
           </h1>
-          <img src="img/Logo.png" alt="StarLight Logo" class="w-20 h-20 rounded-full border-4 border-violet-400 pulse-glow">
+          <img src="img/Logo.png" alt="StarLight Logo" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-violet-400 pulse-glow hidden sm:block">
         </div>
-        <p class="text-2xl mb-8 text-violet-200 animate-slide-in-up hero-subtitle" style="animation-delay: 0.3s;">
+        <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-violet-200 animate-slide-in-up hero-subtitle px-4" style="animation-delay: 0.3s;">
           The Ultimate SAMP Roleplay Experience
         </p>
-        <div class="animate-slide-in-up" style="animation-delay: 0.6s;">
-          <button class="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 px-8 py-4 rounded-full text-xl font-bold animate-glow bounce-hover">
-            JOIN NOW - IP: 188.127.241.74:2159
+        <div class="animate-slide-in-up px-4" style="animation-delay: 0.6s;">
+          <button class="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 px-4 py-2 sm:px-8 sm:py-4 rounded-full text-sm sm:text-xl font-bold animate-glow bounce-hover">
+            <span class="hidden sm:inline">JOIN NOW - IP: 188.127.241.74:2159</span>
+            <span class="sm:hidden">JOIN NOW<br><small>188.127.241.74:2159</small></span>
           </button>
         </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-20">
-      <div class="container mx-auto px-6">
-        <h2 class="orbitron text-4xl font-bold text-center mb-16 gradient-text">Server Features</h2>
-        <div class="grid md:grid-cols-3 gap-8 feature-grid">
-          <div class="glass-effect p-8 rounded-xl animate-slide-in-left floating pulse-glow">
+    <section class="py-10 sm:py-20">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="orbitron text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-16 gradient-text">Server Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 feature-grid">
+          <div class="glass-effect p-6 sm:p-8 rounded-xl animate-slide-in-left floating pulse-glow">
             <div class="text-4xl mb-4">
-              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
                 <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-violet-300">Realistic Roleplay</h3>
-            <p class="text-violet-200">Immerse yourself in a realistic Los Santos with authentic roleplay scenarios and professional staff.</p>
+            <h3 class="text-lg sm:text-2xl font-bold mb-4 text-violet-300">Realistic Roleplay</h3>
+            <p class="text-sm sm:text-base text-violet-200">Immerse yourself in a realistic Los Santos with authentic roleplay scenarios and professional staff.</p>
           </div>
-          <div class="glass-effect p-8 rounded-xl animate-slide-in-up floating pulse-glow" style="animation-delay: 0.2s;">
+          <div class="glass-effect p-6 sm:p-8 rounded-xl animate-slide-in-up floating pulse-glow" style="animation-delay: 0.2s;">
             <div class="text-4xl mb-4">
-              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-violet-300">Professional Staff</h3>
-            <p class="text-violet-200">24/7 active administration ensuring fair gameplay and helping players with any issues.</p>
+            <h3 class="text-lg sm:text-2xl font-bold mb-4 text-violet-300">Professional Staff</h3>
+            <p class="text-sm sm:text-base text-violet-200">24/7 active administration ensuring fair gameplay and helping players with any issues.</p>
           </div>
-          <div class="glass-effect p-8 rounded-xl animate-slide-in-right floating pulse-glow" style="animation-delay: 0.4s;">
+          <div class="glass-effect p-6 sm:p-8 rounded-xl animate-slide-in-right floating pulse-glow" style="animation-delay: 0.4s;">
             <div class="text-4xl mb-4">
-              <svg class="w-12 h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-violet-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 1L3 5v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-violet-300">Anti Cheat System</h3>
-            <p class="text-violet-200">Advanced anti-cheat protection ensuring fair gameplay for all players in our server.</p>
+            <h3 class="text-lg sm:text-2xl font-bold mb-4 text-violet-300">Anti Cheat System</h3>
+            <p class="text-sm sm:text-base text-violet-200">Advanced anti-cheat protection ensuring fair gameplay for all players in our server.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-r from-violet-900/20 to-purple-900/20">
-      <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-8 text-center stats-grid">
+    <section class="py-10 sm:py-20 bg-gradient-to-r from-violet-900/20 to-purple-900/20">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center stats-grid">
           <div class="animate-slide-in-up bounce-hover">
-            <div class="text-4xl font-bold gradient-text mb-2">400</div>
-            <div class="text-violet-300">Max Player</div>
+            <div class="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-2">400</div>
+            <div class="text-sm sm:text-base text-violet-300">Max Player</div>
           </div>
           <div class="animate-slide-in-up bounce-hover" style="animation-delay: 0.2s;">
-            <div class="text-4xl font-bold gradient-text mb-2">24/7</div>
-            <div class="text-violet-300">Server Uptime</div>
+            <div class="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-2">24/7</div>
+            <div class="text-sm sm:text-base text-violet-300">Server Uptime</div>
           </div>
           <div class="animate-slide-in-up bounce-hover" style="animation-delay: 0.4s;">
-            <div class="text-4xl font-bold gradient-text mb-2">50+</div>
-            <div class="text-violet-300">Custom Jobs</div>
+            <div class="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-2">50+</div>
+            <div class="text-sm sm:text-base text-violet-300">Custom Jobs</div>
           </div>
           <div class="animate-slide-in-up bounce-hover" style="animation-delay: 0.6s;">
-            <div class="text-4xl font-bold gradient-text mb-2">10+</div>
-            <div class="text-violet-300">Active Administrators</div>
+            <div class="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-2">10+</div>
+            <div class="text-sm sm:text-base text-violet-300">Active Administrators</div>
           </div>
         </div>
       </div>
@@ -1206,25 +1414,30 @@
 </div>
 
 <!-- Footer -->
-<footer class="fixed bottom-0 w-full bg-gradient-to-r from-violet-900/90 to-purple-900/90 backdrop-blur-md border-t border-violet-500/30 z-40">
-  <div class="container mx-auto px-6 py-3">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-6">
-        <div class="text-sm text-violet-300">
-          <span class="font-semibold">400</span> Max Players
-        </div>
-        <div class="text-sm text-violet-300">
-          <span class="font-semibold">10+</span> Active Administrators
+<!-- SUBSTITUA O FOOTER POR ESTA VERSÃO MOBILE-FRIENDLY -->
+<footer class="bg-gradient-to-r from-violet-900/90 to-purple-900/90 backdrop-blur-md border-t border-violet-500/30">
+  <div class="container mx-auto px-4 sm:px-6 py-3">
+    <div class="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
+      <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
+        <div class="flex items-center space-x-4 text-center">
+          <div class="text-xs sm:text-sm text-violet-300">
+            <span class="font-semibold">400</span> Max Players
+          </div>
+          <div class="text-xs sm:text-sm text-violet-300">
+            <span class="font-semibold">10+</span> Active Admins
+          </div>
         </div>
         <a href="https://discord.gg/bjT3aetusu" target="_blank" class="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded-lg transition-colors">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.30zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
           </svg>
-          <span class="text-white text-sm">Discord</span>
+          <span class="text-white text-xs sm:text-sm">Discord</span>
         </a>
       </div>
-      <div class="text-sm text-violet-400">
-        Made With Much ❤️  by <a href="https://discord.com/users/quirson_ngale" target="_blank" class="text-violet-300 hover:text-violet-200 font-semibold">Walter White</a> - Simplicity is the soul of efficiency
+      <div class="text-xs sm:text-sm text-violet-400 text-center">
+        Made With ❤️ by <a href="https://discord.com/users/quirson_ngale" target="_blank" class="text-violet-300 hover:text-violet-200 font-semibold">Walter White</a>
+        <br class="sm:hidden">
+        <span class="hidden sm:inline"> - </span>Simplicity is the soul of efficiency
       </div>
     </div>
   </div>
@@ -1245,6 +1458,8 @@
   </div>
 </div>
 <script>
+  // SUBSTITUA TODO O JAVASCRIPT NO FINAL DO HTML POR ESTE CÓDIGO MELHORADO
+
   function showPage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.page');
@@ -1265,23 +1480,42 @@
     // Highlight active button
     event.target.classList.remove('bg-violet-800');
     event.target.classList.add('bg-violet-600');
+
+    // Scroll to top on mobile
+    if (window.innerWidth <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   // Initialize page
   document.addEventListener('DOMContentLoaded', function() {
     showPage('home');
+
+    // Add mobile-specific optimizations
+    if (window.innerWidth <= 768) {
+      // Disable animations on mobile for better performance
+      const animatedElements = document.querySelectorAll('.floating');
+      animatedElements.forEach(el => {
+        el.style.animation = 'none';
+      });
+    }
   });
 
-  // Add some interactive effects
+  // Enhanced mobile mouse/touch effects
   document.addEventListener('mousemove', function(e) {
-    const stars = document.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-      const speed = (index + 1) * 0.0001;
-      const x = e.clientX * speed;
-      const y = e.clientY * speed;
-      star.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    // Only run on desktop to save mobile performance
+    if (window.innerWidth > 768) {
+      const stars = document.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        const speed = (index + 1) * 0.0001;
+        const x = e.clientX * speed;
+        const y = e.clientY * speed;
+        star.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
   });
+
+  // Mobile-optimized rules section function
   function showRulesSection(sectionId) {
     // Hide all sections
     const sections = document.querySelectorAll('.rules-section');
@@ -1300,21 +1534,36 @@
 
     // Highlight active category
     event.target.closest('.rules-category').classList.add('active');
+
+    // On mobile, scroll to content area after category selection
+    if (window.innerWidth <= 768) {
+      const contentArea = document.querySelector('.rules-content-area');
+      contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
-  // Initialize rules dashboard
-  document.addEventListener('DOMContentLoaded', function() {
-    // Any additional initialization can go here
-  });
-  // Login Modal Functions
+  // Mobile-optimized login modal functions
   function showLoginModal() {
-    document.getElementById('loginModal').style.display = 'block';
+    const modal = document.getElementById('loginModal');
+    modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+
+    // Prevent scrolling behind modal on mobile
+    document.addEventListener('touchmove', preventScroll, { passive: false });
   }
 
   function closeLoginModal() {
-    document.getElementById('loginModal').style.display = 'none';
+    const modal = document.getElementById('loginModal');
+    modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+
+    // Re-enable scrolling on mobile
+    document.removeEventListener('touchmove', preventScroll);
+  }
+
+  // Prevent scroll function for mobile modal
+  function preventScroll(e) {
+    e.preventDefault();
   }
 
   // Close modal when clicking outside
@@ -1324,20 +1573,115 @@
     }
   });
 
-  // Enhanced interactions
+  // Enhanced mobile interactions
   document.addEventListener('DOMContentLoaded', function() {
-    // Add dynamic hover effects
-    const cards = document.querySelectorAll('.team-card, .glass-effect');
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
+    // Mobile-specific optimizations
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // Reduce animations for better performance
+      const heavyAnimations = document.querySelectorAll('.animate-glow, .pulse-glow');
+      heavyAnimations.forEach(el => {
+        el.style.animation = 'none';
       });
 
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
+      // Add touch-friendly interactions
+      const cards = document.querySelectorAll('.team-card, .glass-effect');
+      cards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'translateY(-5px) scale(1.01)';
+        });
+
+        card.addEventListener('touchend', function() {
+          setTimeout(() => {
+            this.style.transform = 'translateY(0) scale(1)';
+          }, 150);
+        });
+      });
+    } else {
+      // Desktop hover effects
+      const cards = document.querySelectorAll('.team-card, .glass-effect');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    }
+  });
+
+  // Mobile menu toggle functionality (if needed in future)
+  function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+      mobileMenu.classList.toggle('hidden');
+    }
+  }
+
+  // Handle orientation changes on mobile
+  window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+      window.location.reload();
+    }, 500);
+  });
+
+  // Performance optimization for mobile
+  if (window.innerWidth <= 768) {
+    // Lazy load images
+    const images = document.querySelectorAll('img');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src || img.src;
+          observer.unobserve(img);
+        }
       });
     });
+
+    images.forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+
+  // Touch gesture improvements
+  let touchStartY = 0;
+  let touchEndY = 0;
+
+  document.addEventListener('touchstart', e => {
+    touchStartY = e.changedTouches[0].screenY;
   });
+
+  document.addEventListener('touchend', e => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartY - touchEndY;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swipe up - could add functionality here
+      } else {
+        // Swipe down - could add functionality here
+      }
+    }
+  }
+
+  // Viewport height fix for mobile browsers
+  function setVH() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  setVH();
+  window.addEventListener('resize', setVH);
+  window.addEventListener('orientationchange', setVH);
 </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9645f65690244ec6',t:'MTc1MzM4Njc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
