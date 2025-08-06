@@ -660,6 +660,26 @@
         min-height: 44px;
       }
     }
+    /* Menu mobile */
+    #mobile-nav.show {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(76, 29, 149, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-top: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    #mobile-nav.show .nav-buttons {
+      flex-direction: column;
+      space-x: 0;
+      gap: 0.5rem;
+      width: 100%;
+    }
   </style>
 </head>
 <body class="text-white">
@@ -684,7 +704,14 @@
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-4">
-        <div class="flex flex-wrap justify-center space-x-2 sm:space-x-6 nav-buttons">
+        <!-- Botão hamburguer (só aparece no mobile) -->
+        <button onclick="toggleMobileMenu()" class="md:hidden flex flex-col space-y-1 mr-4">
+          <span class="w-6 h-0.5 bg-white"></span>
+          <span class="w-6 h-0.5 bg-white"></span>
+          <span class="w-6 h-0.5 bg-white"></span>
+        </button>
+
+        <div id="mobile-nav" class="hidden md:flex flex-wrap justify-center space-x-2 sm:space-x-6 nav-buttons">
           <button onclick="showPage('home')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Home</button>
           <button onclick="showPage('about')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">About</button>
           <button onclick="showPage('rules')" class="nav-button px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold bounce-hover text-xs sm:text-sm">Rules</button>
@@ -1672,6 +1699,14 @@
       }
     }
   }
+  function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobile-nav');
+    if (mobileNav.classList.contains('show')) {
+      mobileNav.classList.remove('show');
+    } else {
+      mobileNav.classList.add('show');
+    }
+  }
 
   // Viewport height fix for mobile browsers
   function setVH() {
@@ -1682,6 +1717,7 @@
   setVH();
   window.addEventListener('resize', setVH);
   window.addEventListener('orientationchange', setVH);
+
 </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9645f65690244ec6',t:'MTc1MzM4Njc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
